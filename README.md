@@ -24,7 +24,7 @@ Claude Code는 첫 대화 시작 이후 일정 시간이 지나면 토큰 상태
 2. Python venv(`$BASE/.venv`)가 없으면 자동 생성
 3. `holidays` 패키지가 없으면 설치
 4. 오늘 날짜가 주말/한국 공휴일이면 종료
-5. 아니면 `claude --bare`로 최소 토큰 요청 실행 (`Reply exactly: OK`)
+5. 아니면 `claude -p`로 최소 토큰 요청 실행 (`Reply exactly: OK`)
 6. 결과를 로그 파일(`$BASE/claude_keepalive.log`)에 기록
 
 ## 환경 변수(선택)
