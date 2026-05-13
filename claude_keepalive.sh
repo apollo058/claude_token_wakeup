@@ -10,6 +10,9 @@ CLAUDE="${CLAUDE_BIN:-/usr/local/bin/claude}"
 LOG="$BASE/claude_keepalive.log"
 LOCK="/tmp/claude_keepalive.lock"
 
+# 초기 오류도 로그로 남길 수 있게 로그 디렉터리를 먼저 보장
+mkdir -p "$BASE"
+
 export TZ="Asia/Seoul"
 
 log() {
@@ -54,9 +57,9 @@ run_claude_ping() {
   PROMPT="Reply exactly: OK"
 
   if command -v timeout >/dev/null 2>&1; then
-    OUT="$(timeout 90 "$CLAUDE" --bare -p "$PROMPT" --output-format text 2>&1 || true)"
+    OUT="$(timeout 90 "$CLAUDE" -p "$PROMPT" --output-format text 2>&1 || true)"
   else
-    OUT="$("$CLAUDE" --bare -p "$PROMPT" --output-format text 2>&1 || true)"
+    OUT="$("$CLAUDE" -p "$PROMPT" --output-format text 2>&1 || true)"
   fi
 
   FIRST="$(printf '%s' "$OUT" | head -n 1 | tr -d '\r')"
